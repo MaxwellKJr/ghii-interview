@@ -4,13 +4,13 @@ part 'repository.g.dart';
 
 @collection
 class Repository {
-  Id? id;
-  String fullname;
-  bool isPrivate;
-  String login;
-  String avatarUrl;
-  String type;
-  String description;
+  late Id? id;
+  late String fullname;
+  late bool isPrivate;
+  late String login;
+  late String avatarUrl;
+  late String type;
+  late String description;
 
   Repository({
     this.id,
@@ -24,14 +24,13 @@ class Repository {
 
   factory Repository.fromJson(Map<String, dynamic> json) {
     return Repository(
-      id: json['id'] as int?, // Make sure to cast to the correct type
+      id: json['id'] as int?,
       fullname: json['full_name'] as String,
       isPrivate: json['private'] as bool,
       login: json['owner']['login'] as String,
       avatarUrl: json['owner']['avatar_url'] as String,
       type: json['owner']['type'] as String,
-      description: json['description'] as String? ??
-          '', // Add a default value for description
+      description: json['description'] as String? ?? '',
     );
   }
 }

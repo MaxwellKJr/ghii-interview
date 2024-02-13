@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:ghii_interview/db_controllers/repository_database.dart';
 import 'package:ghii_interview/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await RepositoryDatabse.initialize();
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => RepositoryDatabse(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
