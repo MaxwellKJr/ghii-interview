@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:ghii_interview/db_controllers/repository_database.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
 import 'package:http/http.dart' as http;
-import 'package:isar/isar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -66,25 +65,16 @@ class _HomePageState extends State<HomePage> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Image.network(repository.avatarUrl),
                             Text('Full Name: ${repository.fullname}'),
                             Text('Private: ${repository.isPrivate}'),
                             Text('Login: ${repository.login}'),
-                            Image.network(repository.avatarUrl),
                             Text('Type: ${repository.type}'),
                             Text('Description: ${repository.description}'),
                             Row(
                               children: [
                                 FilledButton(
-                                    onPressed: () async {
-                                      saveToDB(
-                                          repository.fullname,
-                                          repository.isPrivate,
-                                          repository.description,
-                                          repository.type,
-                                          repository.avatarUrl,
-                                          repository.login);
-                                    },
-                                    child: const Text("Save"))
+                                    onPressed: () {}, child: const Text("Save"))
                               ],
                             ), // Add a divider between repositories
                             const Divider(),
@@ -109,7 +99,4 @@ class _HomePageState extends State<HomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
-  void saveToDB(String fullname, bool isPrivate, String description,
-      String type, String avatarUrl, String login) async {}
 }
