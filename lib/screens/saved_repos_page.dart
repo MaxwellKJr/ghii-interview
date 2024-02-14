@@ -23,38 +23,69 @@ class _SavedReposPageState extends State<SavedReposPage> {
     context.read<RepositoryDatabse>().fetchRepositories();
   }
 
-  deleteRepository(Id? id) {}
-
   @override
   Widget build(BuildContext context) {
     final repositoryDatabse = context.watch<RepositoryDatabse>();
 
     List<Repository> savedRepositories = repositoryDatabse.savedRepositories;
 
+    // Delete Repository
+    void deleteRepository(id) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: const Text("Delete this repo?"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Cancel")),
+                  TextButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                      ),
+                      onPressed: () {
+                        context.read<RepositoryDatabse>().deleteRepository(id);
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        "Yes, delete",
+                      ))
+                ],
+              ));
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Saved Repositories"),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        body: ListView.builder(
-            itemCount: savedRepositories.length,
-            itemBuilder: (context, index) {
-              final repository = savedRepositories[index];
-              print(savedRepositories.length);
-              return ListTile(
-                title: Text(repository.fullname),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                        onPressed: () => deleteRepository(repository.id),
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        )),
-                  ],
-                ),
-              );
-            }));
+        body: savedRepositories.isEmpty
+            ? const Center(
+                child: Text("No repositories have been saved."),
+              )
+            : ListView.builder(
+                itemCount: savedRepositories.length,
+                itemBuilder: (context, index) {
+                  final repository = savedRepositories[index];
+                  return ListTile(
+                    title: Text(repository.fullname),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                            onPressed: () => deleteRepository(repository.id),
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            )),
+                      ],
+                    ),
+                  );
+                }));
   }
 }
