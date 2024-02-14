@@ -77,13 +77,14 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const SavedReposPage()));
         },
         tooltip: 'Saved Repositories',
-        child: const Icon(Icons.save),
+        icon: const Icon(Icons.save),
+        label: const Text("Saved Repos"),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
