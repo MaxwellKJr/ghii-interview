@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghii_interview/db_controllers/repository_database.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,17 @@ class _SavedRepositoryCardState extends State<SavedRepositoryCard> {
                           MaterialStateProperty.all<Color>(Colors.white),
                     ),
                     onPressed: () {
-                      context.read<RepositoryDatabse>().deleteRepository(id);
+                      context
+                          .read<RepositoryDatabse>()
+                          .deleteRepository(id)
+                          .then((id) => Fluttertoast.showToast(
+                              msg: "Repository Deleted",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0));
                       Navigator.pop(context);
                     },
                     child: const Text(
