@@ -46,8 +46,6 @@ class _RepositoryCardState extends State<RepositoryCard> {
               child: ClipOval(
                 child: CachedNetworkImage(
                   imageUrl: widget.repository.avatarUrl,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
