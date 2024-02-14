@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghii_interview/db_controllers/repository_database.dart';
@@ -40,7 +41,16 @@ class _RepositoryCardState extends State<RepositoryCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(widget.repository.avatarUrl),
+              radius: 24,
+              backgroundColor: Colors.grey,
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: widget.repository.avatarUrl,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
+              ),
             ),
             const SizedBox(
               width: 10,
