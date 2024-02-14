@@ -11,18 +11,19 @@ class RepositoryDatabse extends ChangeNotifier {
     isar = await Isar.open([RepositorySchema], directory: dir.path);
   }
 
-  final List<Repository> savedRepository = [];
+  final List<Repository> savedRepositories = [];
 
   // Add Repository to Local DB
-  Future<void> addRepository(Repository newRepo) async {
-    newRepo
+  Future<void> addRepository(Repository repositoryToSave) async {
+    final newRepo = repositoryToSave
       ..fullname
       ..login
       ..isPrivate
       ..avatarUrl
       ..description;
 
-    await isar.writeTxn(() => isar.repositorys.put(newRepo));
+    await isar.writeTxn(() => isar.repositorys.put(repositoryToSave));
+    print(newRepo.fullname);
     fetchRepositories();
   }
 
@@ -31,8 +32,8 @@ class RepositoryDatabse extends ChangeNotifier {
     List<Repository> fetchedRepositories =
         await isar.repositorys.where().findAll();
 
-    savedRepository.clear();
-    savedRepository.addAll(fetchedRepositories);
+    savedRepositories.clear();
+    savedRepositories.addAll(fetchedRepositories);
   }
 
   // Delete Repository from DB

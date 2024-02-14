@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ghii_interview/components/repository_card.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
 import 'package:ghii_interview/screens/saved_repos_page.dart';
 import 'package:http/http.dart' as http;
@@ -62,46 +64,8 @@ class _HomePageState extends State<HomePage> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: reposList.map((repository) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(repository.avatarUrl),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Full Name: ${repository.fullname}'),
-                                      Text('Private: ${repository.isPrivate}'),
-                                      Text('Login: ${repository.login}'),
-                                      Text('Type: ${repository.type}'),
-                                      Text('Type: ${repository.description}'),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          FilledButton(
-                                              onPressed: () {},
-                                              child: const Text("Save"))
-                                        ],
-                                      ), // Add a divider between repositories
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            const Divider(),
-                          ],
+                        return RepositoryCard(
+                          repository: repository,
                         );
                       }).toList(),
                     );
