@@ -64,7 +64,7 @@ class _RepositoryCardState extends State<RepositoryCard> {
                           },
                           child: const Text("Save"))
                     ],
-                  ), // Add a divider between repositories
+                  ),
                 ],
               ),
             ),
