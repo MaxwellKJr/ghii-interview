@@ -15,7 +15,7 @@ class RepositoryDatabse extends ChangeNotifier {
 
   // Add Repository to Local DB
   Future<void> addRepository(Repository repositoryToSave) async {
-    final newRepo = repositoryToSave
+    repositoryToSave
       ..fullname
       ..login
       ..isPrivate
@@ -23,7 +23,6 @@ class RepositoryDatabse extends ChangeNotifier {
       ..description;
 
     await isar.writeTxn(() => isar.repositorys.put(repositoryToSave));
-    print(newRepo.fullname);
     fetchRepositories();
   }
 
@@ -34,6 +33,7 @@ class RepositoryDatabse extends ChangeNotifier {
 
     savedRepositories.clear();
     savedRepositories.addAll(fetchedRepositories);
+    notifyListeners();
   }
 
   // Delete Repository from DB

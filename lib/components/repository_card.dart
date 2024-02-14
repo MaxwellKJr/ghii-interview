@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghii_interview/db_controllers/repository_database.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
 
-class RepositoryCard extends StatelessWidget {
+class RepositoryCard extends StatefulWidget {
   final Repository repository;
 
   const RepositoryCard({
@@ -11,6 +11,11 @@ class RepositoryCard extends StatelessWidget {
     required this.repository,
   });
 
+  @override
+  State<RepositoryCard> createState() => _RepositoryCardState();
+}
+
+class _RepositoryCardState extends State<RepositoryCard> {
   @override
   Widget build(BuildContext context) {
     final RepositoryDatabse newRepo = RepositoryDatabse();
@@ -35,7 +40,7 @@ class RepositoryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(repository.avatarUrl),
+              backgroundImage: NetworkImage(widget.repository.avatarUrl),
             ),
             const SizedBox(
               width: 10,
@@ -45,17 +50,17 @@ class RepositoryCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Full Name: ${repository.fullname}'),
-                  Text('Private: ${repository.isPrivate}'),
-                  Text('Login: ${repository.login}'),
-                  Text('Type: ${repository.type}'),
-                  Text('Type: ${repository.description}'),
+                  Text('Full Name: ${widget.repository.fullname}'),
+                  Text('Private: ${widget.repository.isPrivate}'),
+                  Text('Login: ${widget.repository.login}'),
+                  Text('Type: ${widget.repository.type}'),
+                  Text('Type: ${widget.repository.description}'),
                   const SizedBox(height: 10),
                   Row(
                     children: [
                       FilledButton(
                           onPressed: () async {
-                            saveRepository(repository);
+                            saveRepository(widget.repository);
                           },
                           child: const Text("Save"))
                     ],

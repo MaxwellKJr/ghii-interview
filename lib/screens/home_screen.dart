@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ghii_interview/components/repository_card.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
 import 'package:ghii_interview/screens/saved_repos_page.dart';
