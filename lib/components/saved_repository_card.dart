@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+
 import 'package:ghii_interview/db_controllers/repository_database.dart';
 import 'package:ghii_interview/models/repository/repository.dart';
-import 'package:provider/provider.dart';
 
 class SavedRepositoryCard extends StatefulWidget {
   final Repository repository;
@@ -43,9 +45,9 @@ class _SavedRepositoryCardState extends State<SavedRepositoryCard> {
                 TextButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          WidgetStateProperty.all<Color>(Colors.red),
                       foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                          WidgetStateProperty.all<Color>(Colors.white),
                     ),
                     onPressed: () {
                       context
@@ -101,9 +103,9 @@ class _SavedRepositoryCardState extends State<SavedRepositoryCard> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.red),
+                                WidgetStateProperty.all<Color>(Colors.red),
                             foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
+                                WidgetStateProperty.all<Color>(Colors.white),
                           ),
                           child: const Text("Delete Repo")),
                     ],
